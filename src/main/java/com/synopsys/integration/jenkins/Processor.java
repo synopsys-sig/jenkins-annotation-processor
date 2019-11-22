@@ -22,10 +22,6 @@
  */
 package com.synopsys.integration.jenkins;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -46,16 +42,8 @@ import javax.lang.model.type.DeclaredType;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic;
-import javax.tools.FileObject;
-import javax.tools.StandardLocation;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.vladsch.flexmark.ext.tables.TablesExtension;
-import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class Processor extends AbstractProcessor {
@@ -78,48 +66,30 @@ public class Processor extends AbstractProcessor {
                 return true;
             }
 
+            final HelpHtmlGenerator helpHtmlGenerator = new HelpHtmlGenerator(filer);
+            final JellyGenerator jellyGenerator = new JellyGenerator(filer);
+
             final Set<TypeElement> typeElements = getAnnotatedClassesAsTypeElements(roundEnv.getRootElements(), annotations);
             for (final TypeElement typeElement : typeElements) {
                 final String packageString = elementUtils.getPackageOf(typeElement).getQualifiedName().toString();
                 final String typeName = typeElement.getSimpleName().toString();
                 final String resourcePackage = packageString + "." + typeName;
 
+                jellyGenerator.generateJellyFromAnnotations(resourcePackage, typeElement);
+
                 for (final VariableElement variableElement : ElementFilter.fieldsIn(typeElement.getEnclosedElements())) {
-                    generateHelpHtmlFromAnnotation(resourcePackage, variableElement);
+                    helpHtmlGenerator.generateHelpHtmlFromAnnotation(resourcePackage, variableElement);
                 }
             }
         } catch (final Exception e) {
-            messager.printMessage(Diagnostic.Kind.ERROR, e.toString());
-            Arrays.stream(e.getStackTrace()).forEach(traceElement -> messager.printMessage(Diagnostic.Kind.ERROR, traceElement.toString()));
+            messager.printMessage(Diagnostic.Kind.ERROR, ExceptionUtils.getStackTrace(e));
         }
         return true;
     }
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        return Stream.of(HelpMarkdown.class.getCanonicalName()).collect(Collectors.toSet());
-    }
-
-    private void generateHelpHtmlFromAnnotation(final String resourcePackage, final VariableElement variableElement) throws IOException {
-        final HelpMarkdown helpMarkdown = variableElement.getAnnotation(HelpMarkdown.class);
-        if (helpMarkdown != null && StringUtils.isNotBlank(helpMarkdown.value())) {
-            final String fileName = "help-" + variableElement.getSimpleName().toString() + ".html";
-            final String mdContents = "<div>\r\n\r\n" + helpMarkdown.value() + "\r\n</div>";
-
-            final MutableDataSet options = new MutableDataSet();
-            options.set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()));
-            options.set(Parser.CODE_SOFT_LINE_BREAKS, true);
-
-            final Parser parser = Parser.builder(options).build();
-            final Node document = parser.parse(mdContents);
-            final HtmlRenderer renderer = HtmlRenderer.builder(options).build();
-            final String fileContents = renderer.render(document);
-
-            final FileObject helpHtmlFile = filer.createResource(StandardLocation.CLASS_OUTPUT, resourcePackage, fileName);
-            try (Writer writer = helpHtmlFile.openWriter()) {
-                writer.write(fileContents);
-            }
-        }
+        return Stream.of(HelpMarkdown.class.getCanonicalName(), GenerateJelly.class.getCanonicalName()).collect(Collectors.toSet());
     }
 
     private Set<TypeElement> getAnnotatedClassesAsTypeElements(final Set<? extends Element> elements, final Set<? extends Element> supportedAnnotations) {
