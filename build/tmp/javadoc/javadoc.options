@@ -4,4 +4,5 @@
 -doctitle 'jenkins-annotation-processor 0.0.1-SNAPSHOT API'
 -quiet 
 -windowtitle 'jenkins-annotation-processor 0.0.1-SNAPSHOT API'
-'/Users/rotte/git/integrations/libraries/jenkins-annotation-processor/src/main/java/com/synopsys/integration/jenkins/Processor.java'
+'/Users/rotte/git/integrations/libraries/jenkins-annotation-processor/src/main/java/com/synopsys/integration/jenkins/annotations/HelpMarkdownProcessor.java'
+'/Users/rotte/git/integrations/libraries/jenkins-annotation-processor/src/main/java/com/synopsys/integration/jenkins/annotations/HelpHtmlGenerator.java'

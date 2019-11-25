@@ -20,7 +20,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.synopsys.integration.jenkins;
+package com.synopsys.integration.jenkins.annotations;
 
 import java.util.List;
 import java.util.Set;
@@ -46,7 +46,7 @@ import javax.tools.Diagnostic;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public class Processor extends AbstractProcessor {
+public class HelpMarkdownProcessor extends AbstractProcessor {
     private Filer filer;
     private Messager messager;
     private Elements elementUtils;
@@ -67,15 +67,12 @@ public class Processor extends AbstractProcessor {
             }
 
             final HelpHtmlGenerator helpHtmlGenerator = new HelpHtmlGenerator(filer);
-            final JellyGenerator jellyGenerator = new JellyGenerator(filer);
 
             final Set<TypeElement> typeElements = getAnnotatedClassesAsTypeElements(roundEnv.getRootElements(), annotations);
             for (final TypeElement typeElement : typeElements) {
                 final String packageString = elementUtils.getPackageOf(typeElement).getQualifiedName().toString();
                 final String typeName = typeElement.getSimpleName().toString();
                 final String resourcePackage = packageString + "." + typeName;
-
-                jellyGenerator.generateJellyFromAnnotations(resourcePackage, typeElement);
 
                 for (final VariableElement variableElement : ElementFilter.fieldsIn(typeElement.getEnclosedElements())) {
                     helpHtmlGenerator.generateHelpHtmlFromAnnotation(resourcePackage, variableElement);
@@ -89,7 +86,7 @@ public class Processor extends AbstractProcessor {
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        return Stream.of(HelpMarkdown.class.getCanonicalName(), GenerateJelly.class.getCanonicalName()).collect(Collectors.toSet());
+        return Stream.of(HelpMarkdown.class.getCanonicalName()).collect(Collectors.toSet());
     }
 
     private Set<TypeElement> getAnnotatedClassesAsTypeElements(final Set<? extends Element> elements, final Set<? extends Element> supportedAnnotations) {
