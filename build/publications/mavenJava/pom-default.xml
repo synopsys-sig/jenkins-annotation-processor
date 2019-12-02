@@ -4,9 +4,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.synopsys.integration</groupId>
   <artifactId>jenkins-annotation-processor</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>jenkins-annotation-processor</name>
-  <description>foo</description>
+  <description>Annotation processor for Synopsys' Jenkins Common library</description>
   <url>https://www.github.com/blackducksoftware/jenkins-annotation-processor</url>
   <licenses>
     <license>
@@ -33,7 +33,7 @@
     <dependency>
       <groupId>com.synopsys.integration</groupId>
       <artifactId>jenkins-common</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.0.1</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>

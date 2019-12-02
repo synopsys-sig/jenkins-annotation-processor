@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-Automatic-Module-Name: com.synopsys.integration.jenkins-annotation-proce
- ssor
+Automatic-Module-Name: com.synopsys.integration.jenkins-annotation-pro
+ cessor
 
