@@ -19,7 +19,10 @@ targetCompatibility = JavaVersion.VERSION_11
 
 apply plugin: 'com.blackducksoftware.integration.library'
 
-nexusStaging { packageGroup = 'com.synopsys' }
+nexusStaging {
+    packageGroup = 'com.synopsys'
+    stagingProfileId = '4af8bea8300633'
+}
 
 dependencies {
     implementation 'com.synopsys.integration:jenkins-common:0.0.1-SNAPSHOT'
