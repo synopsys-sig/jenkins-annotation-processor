@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
         maven { url 'https://plugins.gradle.org/m2/' }
     }
-    dependencies { classpath 'com.blackducksoftware.integration:common-gradle-plugin:0.0.+' }
+    dependencies { classpath 'com.synopsys.integration:common-gradle-plugin:1.1.0' }
 }
 
 plugins { id 'groovy' }
@@ -11,21 +11,15 @@ plugins { id 'groovy' }
 project.ext.moduleName = 'com.synopsys.integration.jenkins-annotation-processor'
 project.ext.javaUseAutoModuleName = 'true'
 
-group = 'com.synopsys.integration'
 version = '0.0.2-SNAPSHOT'
 description = 'Annotation processor for Synopsys\' Jenkins Common library'
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
-apply plugin: 'com.blackducksoftware.integration.library'
-
-nexusStaging {
-    packageGroup = 'com.synopsys'
-    stagingProfileId = '4af8bea8300633'
-}
+apply plugin: 'com.synopsys.integration.library'
 
 dependencies {
-    implementation 'com.synopsys.integration:jenkins-common:0.0.1'
+    implementation 'com.synopsys.integration:jenkins-common:0.1.4'
     implementation 'org.apache.commons:commons-text:1.8'
     implementation 'com.vladsch.flexmark:flexmark-all:0.50.44'
 }
