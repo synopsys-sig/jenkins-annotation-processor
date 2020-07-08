@@ -45,14 +45,14 @@ import javax.tools.Diagnostic;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 public class HelpMarkdownProcessor extends AbstractProcessor {
     private Filer filer;
     private Messager messager;
     private Elements elementUtils;
 
     @Override
-    public synchronized void init(final ProcessingEnvironment processingEnv) {
+    public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
         filer = processingEnv.getFiler();
         messager = processingEnv.getMessager();
@@ -60,25 +60,25 @@ public class HelpMarkdownProcessor extends AbstractProcessor {
     }
 
     @Override
-    public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv) {
+    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         try {
             if (roundEnv.processingOver()) {
                 return true;
             }
 
-            final HelpHtmlGenerator helpHtmlGenerator = new HelpHtmlGenerator(filer);
+            HelpHtmlGenerator helpHtmlGenerator = new HelpHtmlGenerator(filer);
 
-            final Set<TypeElement> typeElements = getAnnotatedClassesAsTypeElements(roundEnv.getRootElements(), annotations);
-            for (final TypeElement typeElement : typeElements) {
-                final String packageString = elementUtils.getPackageOf(typeElement).getQualifiedName().toString();
-                final String typeName = typeElement.getSimpleName().toString();
-                final String resourcePackage = packageString + "." + typeName;
+            Set<TypeElement> typeElements = getAnnotatedClassesAsTypeElements(roundEnv.getRootElements(), annotations);
+            for (TypeElement typeElement : typeElements) {
+                String packageString = elementUtils.getPackageOf(typeElement).getQualifiedName().toString();
+                String typeName = typeElement.getSimpleName().toString();
+                String resourcePackage = packageString + "." + typeName;
 
-                for (final VariableElement variableElement : ElementFilter.fieldsIn(typeElement.getEnclosedElements())) {
+                for (VariableElement variableElement : ElementFilter.fieldsIn(typeElement.getEnclosedElements())) {
                     helpHtmlGenerator.generateHelpHtmlFromAnnotation(resourcePackage, variableElement);
                 }
             }
-        } catch (final Exception e) {
+        } catch (Exception e) {
             messager.printMessage(Diagnostic.Kind.ERROR, ExceptionUtils.getStackTrace(e));
         }
         return true;
@@ -89,7 +89,7 @@ public class HelpMarkdownProcessor extends AbstractProcessor {
         return Stream.of(HelpMarkdown.class.getCanonicalName()).collect(Collectors.toSet());
     }
 
-    private Set<TypeElement> getAnnotatedClassesAsTypeElements(final Set<? extends Element> elements, final Set<? extends Element> supportedAnnotations) {
+    private Set<TypeElement> getAnnotatedClassesAsTypeElements(Set<? extends Element> elements, Set<? extends Element> supportedAnnotations) {
         return elements.stream()
                    .filter(TypeElement.class::isInstance)
                    .map(TypeElement.class::cast)
@@ -97,7 +97,7 @@ public class HelpMarkdownProcessor extends AbstractProcessor {
                    .collect(Collectors.toSet());
     }
 
-    private boolean elementContainsSupportedAnnotation(final Element element, final Set<? extends Element> supportedAnnotations) {
+    private boolean elementContainsSupportedAnnotation(Element element, Set<? extends Element> supportedAnnotations) {
         return element.getEnclosedElements().stream()
                    .map(Element::getAnnotationMirrors)
                    .flatMap(List::stream)

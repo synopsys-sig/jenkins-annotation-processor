@@ -3,20 +3,28 @@ buildscript {
     apply from: 'https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-dependencies.gradle', to: buildscript
 }
 
-plugins { id 'groovy' }
-
 project.ext.moduleName = 'com.synopsys.integration.jenkins-annotation-processor'
 project.ext.javaUseAutoModuleName = 'true'
 
 version = '0.0.2-SNAPSHOT'
 description = 'Annotation processor for Synopsys\' Jenkins Common library'
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
 
 apply plugin: 'com.synopsys.integration.library'
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    // Included to resolve Jenkins and Jenkins plugin dependencies
+    maven { url 'https://repo.jenkins-ci.org/releases/' }
+}
+
 dependencies {
-    implementation 'com.synopsys.integration:jenkins-common:0.1.4'
+    implementation 'com.synopsys.integration:jenkins-common:0.2.1'
     implementation 'org.apache.commons:commons-text:1.8'
     implementation 'com.vladsch.flexmark:flexmark-all:0.50.44'
+
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.3.3'
 }
