@@ -1,0 +1,8 @@
+{
+  "variables": [
+    {
+      "name": "useJdk",
+      "value": "SimplePipeline.JAVA_11"
+    }
+  ]
+}
