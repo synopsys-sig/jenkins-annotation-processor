@@ -22,9 +22,13 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.synopsys.integration:jenkins-common:0.5.4'
+    implementation 'com.synopsys.integration:jenkins-common:0.5.5'
     implementation 'org.apache.commons:commons-text:1.10.0'
+
     implementation 'com.vladsch.flexmark:flexmark-all:0.64.0'
+
+//  override icu4j as version pulled in by flexmark has issues.
+    implementation 'com.ibm.icu:icu4j:71.1'
 
     testImplementation 'org.mockito:mockito-junit-jupiter:3.3.3'
 }
