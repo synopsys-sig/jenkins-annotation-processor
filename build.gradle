@@ -3,13 +3,13 @@ buildscript {
     apply from: 'https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-dependencies.gradle', to: buildscript
 }
 
-project.ext.moduleName = 'com.synopsys.integration.jenkins-annotation-processor'
+project.ext.moduleName = 'com.blackduck.integration.jenkins-annotation-processor'
 project.ext.javaUseAutoModuleName = 'true'
 
 version = '0.0.8-SNAPSHOT'
-description = 'Annotation processor for Synopsys\' Jenkins Common library'
+description = 'Annotation processor for Blackduck\'s Jenkins Common library'
 
-apply plugin: 'com.synopsys.integration.library'
+apply plugin: 'com.blackduck.integration.library'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.synopsys.integration:jenkins-common:0.5.5'
+    implementation 'com.blackduck.integration:jenkins-common:0.5.5'
     implementation 'org.apache.commons:commons-text:1.10.0'
 
     implementation 'com.vladsch.flexmark:flexmark-all:0.64.0'

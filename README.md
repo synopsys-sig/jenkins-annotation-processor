@@ -1,2 +1,2 @@
 # Overview
-Annotation processor for Synopsys' Jenkins Common library
+Annotation processor for Blackduck's Jenkins Common library

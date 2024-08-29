@@ -1,22 +1,22 @@
-package com.synopsys.integration.jenkins.annotations;
+package com.sca.integration.jenkins.annotations;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
+import com.synopsys.integration.jenkins.annotations.HelpMarkdown;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.VariableElement;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
 
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class HelpHtmlGeneratorTest {
     @Test
