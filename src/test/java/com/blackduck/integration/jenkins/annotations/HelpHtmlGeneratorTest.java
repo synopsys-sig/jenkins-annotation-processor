@@ -1,4 +1,4 @@
-package com.sca.integration.jenkins.annotations;
+package com.blackduck.integration.jenkins.annotations;
 
 import com.synopsys.integration.jenkins.annotations.HelpMarkdown;
 import org.junit.jupiter.api.Test;
