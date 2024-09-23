@@ -1,28 +1,27 @@
 /*
  * jenkins-annotation-processor
  *
- * Copyright (c) 2022 Synopsys, Inc.
+ * Copyright (c) 2024 Black Duck Software, Inc.
  *
- * Use subject to the terms and conditions of the Synopsys End User Software License and Maintenance Agreement. All rights reserved worldwide.
+ * Use subject to the terms and conditions of the Black Duck Software End User Software License and Maintenance Agreement. All rights reserved worldwide.
  */
-package com.synopsys.integration.jenkins.annotations;
+package com.blackduck.integration.jenkins.annotations;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Collections;
-
-import javax.annotation.processing.Filer;
-import javax.lang.model.element.VariableElement;
-import javax.tools.FileObject;
-import javax.tools.StandardLocation;
-
-import org.apache.commons.lang3.StringUtils;
-
+import com.blackduck.integration.jenkins.annotations.HelpMarkdown;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.annotation.processing.Filer;
+import javax.lang.model.element.VariableElement;
+import javax.tools.FileObject;
+import javax.tools.StandardLocation;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Collections;
 
 public class HelpHtmlGenerator {
     private final Filer filer;
