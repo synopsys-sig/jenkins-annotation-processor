@@ -13,7 +13,7 @@ buildscript {
 project.ext.moduleName = 'com.blackduck.integration.jenkins-annotation-processor'
 project.ext.javaUseAutoModuleName = 'true'
 
-version = '0.0.8-SNAPSHOT'
+version = '1.0.0-SNAPSHOT'
 description = 'Annotation processor for Blackduck\'s Jenkins Common library'
 
 apply plugin: 'com.blackduck.integration.library'
@@ -29,7 +29,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.blackduck.integration:jenkins-common:0.5.5'
+    implementation 'com.blackduck.integration:jenkins-common:1.0.0'
     implementation 'org.apache.commons:commons-text:1.10.0'
 
     implementation 'com.vladsch.flexmark:flexmark-all:0.64.0'

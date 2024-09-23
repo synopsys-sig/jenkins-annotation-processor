@@ -7,7 +7,7 @@
  */
 package com.blackduck.integration.jenkins.annotations;
 
-import com.synopsys.integration.jenkins.annotations.HelpMarkdown;
+import com.blackduck.integration.jenkins.annotations.HelpMarkdown;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;

@@ -7,7 +7,7 @@
  */
 package com.blackduck.integration.jenkins.annotations;
 
-import com.synopsys.integration.jenkins.annotations.HelpMarkdown;
+import com.blackduck.integration.jenkins.annotations.HelpMarkdown;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import javax.annotation.processing.*;

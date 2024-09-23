@@ -1,6 +1,6 @@
 package com.blackduck.integration.jenkins.annotations;
 
-import com.synopsys.integration.jenkins.annotations.HelpMarkdown;
+import com.blackduck.integration.jenkins.annotations.HelpMarkdown;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -23,7 +23,7 @@ public class HelpHtmlGeneratorTest {
     public void testGenerateHelpHtmlFromAnnotation() throws IOException {
         String variableName = "variableName";
         String annotationContent = "* foo\r\n* bar";
-        String resourcePackage = "com.synopsys.integration.jenkins.Example";
+        String resourcePackage = "com.blackduck.integration.jenkins.Example";
 
         String expectedFileName = "help-" + variableName + ".html";
         List<String> expectedFileContents = Arrays.asList("<div>", "<ul>", "<li>foo</li>", "<li>bar</li>", "</ul>", "</div>", "");
