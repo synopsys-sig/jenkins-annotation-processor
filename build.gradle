@@ -1,6 +1,6 @@
 buildscript {
     apply from: 'https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-repositories.gradle', to: buildscript
-    apply from: 'https://raw.githubusercontent.com/blackducksoftware/integration-resources/master/gradle_common/buildscript-cgp-version.gradle'
+    project.ext { managedCgpVersion = '2.1.1' }
 
     ext {
         javaTargetCompatibility = 8
@@ -13,7 +13,7 @@ buildscript {
 project.ext.moduleName = 'com.blackduck.integration.jenkins-annotation-processor'
 project.ext.javaUseAutoModuleName = 'true'
 
-version = '1.0.0-SNAPSHOT'
+version = '1.0.0'
 description = 'Annotation processor for Blackduck\'s Jenkins Common library'
 
 apply plugin: 'com.blackduck.integration.library'
