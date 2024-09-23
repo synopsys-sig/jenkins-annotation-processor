@@ -13,7 +13,7 @@ buildscript {
 project.ext.moduleName = 'com.blackduck.integration.jenkins-annotation-processor'
 project.ext.javaUseAutoModuleName = 'true'
 
-version = '1.0.1-SNAPSHOT'
+version = '1.0.0-SNAPSHOT'
 description = 'Annotation processor for Blackduck\'s Jenkins Common library'
 
 apply plugin: 'com.blackduck.integration.library'
